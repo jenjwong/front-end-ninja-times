@@ -174,14 +174,28 @@
     <li data-time="12:39">
       Video 56
     </li>
-    <li data-time="1:56">
+    <li data-time="2:56">
       Video 57
     </li>
-    <li data-time="4:04">
+    <li data-time="4:06">
       Video 58
     </li>
   </ul>
 <script>
+const times = document.querySelectorAll('[data-time]');
+const totalTimes = [...times].reduce((totalTime, time, index, collection) => {
+  const [mins, secs] = time.dataset.time.split(':');
+  totalTime = parseInt(mins * 60) + parseInt(secs) + totalTime;
+  if (index === collection.length - 1) {
+    const hours = totalTime >= 3600 ? Math.floor(totalTime/3600) : '';
+    const minutes = Math.floor((totalTime % 3600)/60);
+    const seconds = (totalTime % 3600) % 60;
+    totalTime = `${hours}:${minutes}:${seconds}`;
+  }
+  return totalTime;
+}, 0);
+console.log(totalTimes)
+
 </script>
 </body>
 </html>
