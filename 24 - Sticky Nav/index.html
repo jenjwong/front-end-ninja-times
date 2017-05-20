@@ -54,7 +54,25 @@
   </div>
 
 <script>
+const navEl = document.querySelector('nav');
+let navElTop;
 
+
+   _handleScroll = (e) => {
+    let navTop = navEl.getBoundingClientRect().top;
+
+
+    if (navElTop === undefined) {
+      navElTop = navTop;
+    }
+    if (navTop <= 0 && this.scrollY >= navElTop) {
+      document.body.classList.add('nav-fixed');
+
+    } else if (this.scrollY < navElTop){
+      document.body.classList.remove('nav-fixed');
+    }
+  }
+  document.addEventListener('scroll', _handleScroll);
 </script>
 
 </body>
